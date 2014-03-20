@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <description>Very abstract tree implementation</description>
+    <description>Very abstract a tree implementation</description>
     <url>https://github.com/Megaprog</url>
     <developers>
         <developer>
