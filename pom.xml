@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <description>Very abstract a tree implementation</description>
-    <url>https://github.com/Megaprog</url>
+    <url>https://github.com/Megaprog/SomeTree</url>
     <developers>
         <developer>
             <name>Tomas Shestakov</name>
