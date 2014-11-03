@@ -4,6 +4,9 @@ package sometree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ForkJoinTask;
+import java.util.concurrent.RecursiveTask;
+import java.util.stream.Collectors;
 
 /**
  * User: Tomas
@@ -38,6 +41,25 @@ public class Tree {
             maxHeight = Math.max(maxHeight, child.height());
         }
         return maxHeight + 1;
+    }
+
+    public RecursiveTask<Integer> heightForkJoin() {
+        return new RecursiveTask<Integer>() {
+            @Override
+            protected Integer compute() {
+                int maxHeight = 0;
+
+                for (ForkJoinTask<Integer> childHeight : children.stream().map(child -> child.heightForkJoin().fork()).collect(Collectors.toList())) {
+                    maxHeight = Math.max(maxHeight, childHeight.join());
+                }
+
+                return maxHeight + 1;
+            }
+        };
+    }
+
+    public int heightParallel() {
+        return children.parallelStream().mapToInt(Tree::heightParallel).max().orElse(0) + 1;
     }
 
     @Override
